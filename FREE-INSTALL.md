@@ -1,5 +1,7 @@
 # Install Velvet on your iPhone for free from Windows
 
+**Your repository and workflow are now created:** [RinTaiki/velvet-music](https://github.com/RinTaiki/velvet-music). You can skip the repository-creation steps below. Use [INSTALL-ON-IPHONE.md](INSTALL-ON-IPHONE.md) for the actual Windows and iPhone steps; successful IPA builds appear under the repository's **Releases** tab.
+
 There is no installable IPA from the interrupted EAS build. This project now includes a widget-free **unsigned iPhone build** route; the build still needs to run on a Mac runner, and you then sign/install its IPA locally with your free Apple account.
 
 No paid Apple Developer membership, EAS build plan, TestFlight, or App Store submission is used. Apps signed with a free Apple account need refreshing every **7 days**. This is Apple's personal-signing restriction, not a subscription.

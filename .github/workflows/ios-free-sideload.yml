@@ -1,0 +1,57 @@
+name: Build iPhone app for free sideloading
+
+on:
+  workflow_dispatch:
+    inputs:
+      confirm_public_release:
+        description: 'Build and publish an unsigned IPA as a public GitHub prerelease'
+        required: true
+        type: boolean
+        default: false
+
+# Never run on push, never use paid private-repo minutes or larger runners.
+permissions:
+  contents: read
+
+concurrency:
+  group: free-iphone-build
+  cancel-in-progress: false
+
+jobs:
+  build:
+    if: ${{ github.event.repository.private == false && inputs.confirm_public_release }}
+    runs-on: xcode-27
+    timeout-minutes: 90
+    permissions:
+      contents: write
+    env:
+      VELVET_WIDGETS: '0'
+      EXPO_NO_TELEMETRY: '1'
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+          package-manager-cache: false
+      - name: Verify Apple build tools
+        run: |
+          xcodebuild -version
+          xcrun --sdk iphoneos --show-sdk-version
+          pod --version
+      - name: Install JavaScript dependencies
+        run: npm ci
+      - name: Build unsigned standalone iPhone app
+        run: bash scripts/build-unsigned-ios.sh
+      - name: Publish sideload files (no Actions artifact/cache storage)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "sideload-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}" \
+            build/Velvet-unsigned.ipa build/Velvet-unsigned.ipa.sha256 \
+            --repo "$GITHUB_REPOSITORY" \
+            --target "$GITHUB_SHA" \
+            --prerelease \
+            --title "Velvet unsigned iPhone build" \
+            --notes "Personal sideload build. Install/sign using AltStore Classic and your own free Apple account. Refresh signing every seven days. No widgets, no Apple credentials or certificates in this workflow."

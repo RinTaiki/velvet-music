@@ -1,0 +1,14 @@
+node_modules/
+.npm-cache/
+.expo/
+dist/
+/build/
+.tmp/
+.tools/
+/ios/
+/android/
+*.ipa
+*.keystore
+.env*
+!modules/**/ios/
+!modules/**/ios/**

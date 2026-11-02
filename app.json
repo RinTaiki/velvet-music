@@ -1,0 +1,65 @@
+{
+  "expo": {
+    "name": "Velvet",
+    "slug": "velvet-music",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "dark",
+    "scheme": "velvet",
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.velvet.localmusic",
+      "infoPlist": {
+        "UIBackgroundModes": [
+          "audio",
+          "audio"
+        ],
+        "LSSupportsOpeningDocumentsInPlace": true,
+        "UIFileSharingEnabled": true,
+        "ITSAppUsesNonExemptEncryption": false
+      }
+    },
+    "plugins": [
+      [
+        "expo-audio",
+        {
+          "enableBackgroundPlayback": true,
+          "microphonePermission": false,
+          "recordAudioAndroid": false
+        }
+      ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "Choose artwork for your music.",
+          "cameraPermission": false,
+          "microphonePermission": false
+        }
+      ],
+      "expo-document-picker",
+      "./plugins/withVelvetWidgets"
+    ],
+    "extra": {
+      "eas": {
+        "build": {
+          "experimental": {
+            "ios": {
+              "appExtensions": [
+                {
+                  "targetName": "VelvetWidgets",
+                  "bundleIdentifier": "com.velvet.localmusic.widgets",
+                  "entitlements": {
+                    "com.apple.security.application-groups": [
+                      "group.com.velvet.localmusic.music"
+                    ]
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "projectId": "2b9bdd58-a4ec-4763-b649-a4ae2a4ad1e2"
+      }
+    }
+  }
+}

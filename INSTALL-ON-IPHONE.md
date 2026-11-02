@@ -1,6 +1,6 @@
 # Install Velvet from your Windows PC
 
-Your public source repository is **https://github.com/RinTaiki/velvet-music**. The unsigned iPhone build workflow is already uploaded. Its successful output is published at **https://github.com/RinTaiki/velvet-music/releases**. The app must finish compiling before an IPA is available there.
+Your public source repository is **https://github.com/RinTaiki/velvet-music**. The first standalone iPhone build succeeded. Download [Velvet-unsigned.ipa](https://github.com/RinTaiki/velvet-music/releases/download/sideload-41463849674-1/Velvet-unsigned.ipa) on your iPhone, or find future builds at **https://github.com/RinTaiki/velvet-music/releases**.
 
 This route uses a free Apple account and AltStore Classic. Do not enroll in the paid Apple Developer Program or buy an Expo subscription. No Apple password goes into GitHub or this chat.
 
